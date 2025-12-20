@@ -9,6 +9,6 @@ namespace Ordering.Application.Orders.EventHandlers
             logger.LogInformation("Domain Event handled : {DomainEvent}", notification.GetType().Name);
             return Task.CompletedTask;
         }
-    {
+    
     }
 }
