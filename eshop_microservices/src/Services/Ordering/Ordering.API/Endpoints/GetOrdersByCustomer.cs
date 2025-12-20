@@ -11,7 +11,7 @@ namespace Ordering.API.Endpoints
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("/orders/{cutomerId}",async (Guid customerId,ISender sender)=>{
+            app.MapGet("/orders/customer{cutomerId}",async (Guid customerId,ISender sender)=>{
 
                 var result= await sender.Send(new GetOrdersByCustomerQuery(customerId));
                 var responses=result.Adapt<GetOrderByCustomerResponse>();
