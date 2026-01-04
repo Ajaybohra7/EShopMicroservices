@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Ordering.Application.Orders.EventHandlers.Integration
 {
-    public class BasketCheckoutEventHandler(ISender sender,ILogger logger) : IConsumer<BasketCheckoutEvent>
+    public class BasketCheckoutEventHandler(ISender sender,ILogger<BasketCheckoutEventHandler> logger) : IConsumer<BasketCheckoutEvent>
     {
         public async Task Consume(ConsumeContext<BasketCheckoutEvent> context)
         {
@@ -45,3 +45,4 @@ namespace Ordering.Application.Orders.EventHandlers.Integration
 
     }
 }
+    

@@ -26,8 +26,8 @@ namespace Ordering.Domain.ValueObjects
         public static Address Of(string firstName, string lastName, string EmailAddress, string addressLine, string country, string state, string zipCode)
         {
   
-            ArgumentNullException.ThrowIfNullOrWhiteSpace(addressLine);
-            ArgumentNullException.ThrowIfNullOrWhiteSpace(EmailAddress);
+            //ArgumentNullException.ThrowIfNullOrWhiteSpace(addressLine);
+            //ArgumentNullException.ThrowIfNullOrWhiteSpace(EmailAddress);
 
             return new Address(firstName, lastName, EmailAddress, addressLine, country, state, zipCode);
         }

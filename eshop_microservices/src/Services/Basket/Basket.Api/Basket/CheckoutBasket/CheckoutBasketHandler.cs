@@ -4,7 +4,7 @@ using MassTransit;
 
 namespace Basket.Api.Basket.CheckoutBasket;
 public record CheckoutBasketCommand(CheckoutBasketDto BasketCheckoutDto) : ICommand<CheckoutBasketResult>;
-public record CheckoutBasketResult(bool Success);
+public record CheckoutBasketResult(bool IsSuccess);
 
 public class CheckoutBasketValidator : AbstractValidator<CheckoutBasketCommand>
 {
@@ -16,20 +16,20 @@ public class CheckoutBasketValidator : AbstractValidator<CheckoutBasketCommand>
     }
 }
 
-public class CheckoutBasketCommandHandler(IBasketRepository repository,IPublishEndpoint publishEndpoint) : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
+public class CheckoutBasketCommandHandler(IBasketRepository repository, IPublishEndpoint publishEndpoint) : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
 {
-    public  async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken)
+    public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand command, CancellationToken cancellationToken)
     {
-        var basket=await repository.GetBasket(command.BasketCheckoutDto.UserName,cancellationToken);
-        if(basket is null)
+        var basket = await repository.GetBasket(command.BasketCheckoutDto.UserName, cancellationToken);
+        if (basket is null)
         {
-           return new CheckoutBasketResult(false);
+            return new CheckoutBasketResult(false);
         }
-        var eventMessage=command.BasketCheckoutDto.Adapt<BasketCheckoutEvent>();
-        eventMessage.TotalPrice=basket.TotalPrice;
-        await publishEndpoint.Publish(eventMessage,cancellationToken);
-        await repository.DeleteBasket(basket.UserName,cancellationToken);
+        var eventMessage = command.BasketCheckoutDto.Adapt<BasketCheckoutEvent>();
+        eventMessage.TotalPrice = basket.TotalPrice;
+        await publishEndpoint.Publish(eventMessage, cancellationToken);
+        await repository.DeleteBasket(basket.UserName, cancellationToken);
 
-
+        return new CheckoutBasketResult(true);
     }
 }
