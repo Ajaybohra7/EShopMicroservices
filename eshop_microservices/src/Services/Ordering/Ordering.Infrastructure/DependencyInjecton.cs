@@ -23,9 +23,7 @@ namespace Ordering.Infrastructure
 
             services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
-                
-             
-            
+               
 
             return services;    
         }

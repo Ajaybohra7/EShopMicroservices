@@ -11,11 +11,6 @@ namespace Basket.Api.Models
         {
             UserName = username;
         }
-        public ShoppingCart()
-        {
-
-        }
-
-
+   
     }
 }

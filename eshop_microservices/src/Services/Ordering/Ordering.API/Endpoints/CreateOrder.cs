@@ -15,7 +15,7 @@ namespace Ordering.API.Endpoints
         {
             app.MapPost("/orders", async (CreateOrderRequet request, ISender sender) =>
             {
-                var command = request.Adapt<CreateOrderCommand>();
+                var command = request.Adapt<CreateOrderCommand  >();
                 var result = await sender.Send(command);
 
                 var respone = result.Adapt<CreateOrderResponse>();
